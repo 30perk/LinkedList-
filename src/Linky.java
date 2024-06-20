@@ -20,17 +20,20 @@ public class Linky {
 		if (head == null) {
 			head = addNode;
 			head.next = null;
+			tail = addNode;
+			tail.prev = null;
+			size++;
 
 		} else {
 			addNode.next = head;
 			head.prev = addNode;
 			head = addNode;
+			size++;
 		}
-		size++;
 
 	}
 
-	// add to end create tail node
+	// add to end create tail node  -wrong
 	public void addLast(Object data) {
 
 		// new node
@@ -38,24 +41,30 @@ public class Linky {
 		// empty list
 		if (head == null) {
 			head = addNode;
+			head.next = null;
 			tail = addNode;
+			tail.prev = null;
+			size++;
 		} else {
 			// Not empty
 			tail.next = addNode;
 			// prev = prev tail
 			addNode.prev = tail;
+			addNode.next = null;
 			// update tail
 			tail = addNode;
+			
+			size++;
 		}
-		size++;
 
 	}
 
-	// remove First
+	// remove First -wrong
 	public void removeFirst() {
 		if (head == null) {
 			throw new NoSuchElementException("No element to remove");
-		} else {
+		}  
+		
 			if (head.next == null) {
 				head = null;
 				tail = null;
@@ -63,12 +72,13 @@ public class Linky {
 				head = head.next;
 				head.prev = null;
 			}
-			size--;
-		}
+			
+		size--;
+		
 
 	}
 
-	// removeLast
+	// removeLast  -wrong
 	public void removeLast() {
 		// empty list
 		if (head == null) {
@@ -109,7 +119,9 @@ public class Linky {
 		return curr.data;
 
 	}
-
+	
+	
+//  good
 	public boolean contains(Object obj) {
 		if (size == 0) {
 			return false;
@@ -195,6 +207,7 @@ public class Linky {
 		link.removeFirst();
 		System.out.println(link.get(0)); // 1
 		System.out.println(link.contains(1));
+		System.out.println(link.get(-1));
 
 	}
 
