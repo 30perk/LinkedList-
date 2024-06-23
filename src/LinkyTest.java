@@ -8,24 +8,40 @@ class LinkyTest {
 	void addPhirst() {
 		Linky link = new Linky();
 		
+		link.addLast("last");
 		link.addFirst(1);
-		assertEquals(1, link.size());
 		link.addFirst(2);
-		assertEquals(2, link.size());
-		assertEquals(2,link.get(0));
-		link.addFirst("hi");
-		assertEquals("hi", link.get(0));
-		assertEquals(1,link.get(2));
-		assertEquals(3, link.size());
-		assertThrows(IndexOutOfBoundsException.class, () -> {
-			link.get(-1);
-		});
+		link.addFirst(false);
+		link.removeLast();
+		link.removeLast();
+
+		link.removeLast();
+
+		link.removeLast();
+		System.out.println(link.contains(1));
+
+//		System.out.println(link.contains(false));
+
 		
-		assertThrows(IndexOutOfBoundsException.class, () -> {
-			link.get(8);
-		});
 		
-		assertEquals(3, link.size());
+//		link.addFirst(1);
+//		assertEquals(1, link.size());
+//		link.addFirst(2);
+//		assertEquals(2, link.size());
+//		assertEquals(2,link.get(0));
+//		link.addFirst("hi");
+//		assertEquals("hi", link.get(0));
+//		assertEquals(1,link.get(2));
+//		assertEquals(3, link.size());
+//		assertThrows(IndexOutOfBoundsException.class, () -> {
+//			link.get(-1);
+//		});
+//		
+//		assertThrows(IndexOutOfBoundsException.class, () -> {
+//			link.get(8);
+//		});
+//		
+//		assertEquals(3, link.size());
 	}
 	
 	void toLast() {

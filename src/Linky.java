@@ -12,28 +12,25 @@ public class Linky {
 		return size;
 	}
 
-	// add first
+	// add first -good
 	public void addFirst(Object data) {
 
 		Node addNode = new Node(data);
 
 		if (head == null) {
 			head = addNode;
-			head.next = null;
 			tail = addNode;
-			tail.prev = null;
-			size++;
 
 		} else {
 			addNode.next = head;
 			head.prev = addNode;
 			head = addNode;
-			size++;
 		}
+		size++;
 
 	}
 
-	// add to end create tail node  -wrong
+	// add to end create tail node -good
 	public void addLast(Object data) {
 
 		// new node
@@ -41,30 +38,29 @@ public class Linky {
 		// empty list
 		if (head == null) {
 			head = addNode;
-			head.next = null;
 			tail = addNode;
-			tail.prev = null;
-			size++;
+
 		} else {
-			// Not empty
-			tail.next = addNode;
-			// prev = prev tail
+			// not empty
 			addNode.prev = tail;
-			addNode.next = null;
+			tail.next = addNode;
 			// update tail
 			tail = addNode;
-			
-			size++;
+
 		}
+		size++;
 
 	}
 
-	// remove First -wrong
+	// remove First -good
 	public void removeFirst() {
-		if (head == null) {
-			throw new NoSuchElementException("No element to remove");
-		}  
-		
+
+		try {
+
+			if (head == null) {
+				throw new NoSuchElementException("No element to remove");
+			}
+
 			if (head.next == null) {
 				head = null;
 				tail = null;
@@ -72,38 +68,51 @@ public class Linky {
 				head = head.next;
 				head.prev = null;
 			}
-			
-		size--;
-		
+
+		} finally {
+			if (size > 0) {
+
+				size--;
+			}
+		}
 
 	}
 
-	// removeLast  -wrong
+	// removeLast -good
 	public void removeLast() {
 		// empty list
-		if (head == null) {
-			throw new NoSuchElementException("No element to remove");
+		try {
+
+			if (head == null) {
+
+				throw new NoSuchElementException("No element to remove");
+			}
+
+			// only one Node
+			if (head.next == null) {
+				head = null;
+				tail = null;
+				return;
+			}
+
+			else {
+
+				// more than one
+				tail = tail.prev;
+				tail.next = null;
+
+			}
+
+		} finally {
+			if (size > 0) {
+
+				size--;
+			}
 		}
-
-		// only one Node
-		else if (head.next == null) {
-			head = null;
-			tail = null;
-			return;
-		}
-
-		else {
-
-			// more than one
-			tail = tail.prev;
-			tail.next = null;
-
-		}
-		size--;
 
 	}
 
-	// get
+	// get -good
 	public Object get(int index) {
 		// out of bounds
 		if ((index >= size) || (index < 0)) {
@@ -119,8 +128,7 @@ public class Linky {
 		return curr.data;
 
 	}
-	
-	
+
 //  good
 	public boolean contains(Object obj) {
 		if (size == 0) {
